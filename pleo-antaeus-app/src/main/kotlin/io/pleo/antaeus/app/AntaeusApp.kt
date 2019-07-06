@@ -30,17 +30,17 @@ fun main() {
 
     // Connect to the database and create the needed tables. Drop any existing data.
     val db = Database
-        .connect("jdbc:sqlite:/tmp/data.db", "org.sqlite.JDBC")
-        .also {
-            TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
-            transaction(it) {
-                addLogger(StdOutSqlLogger)
-                // Drop all existing tables to ensure a clean slate on each run
-                SchemaUtils.drop(*tables)
-                // Create all tables
-                SchemaUtils.create(*tables)
+            .connect("jdbc:sqlite:/tmp/data.db", "org.sqlite.JDBC")
+            .also {
+                TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
+                transaction(it) {
+                    addLogger(StdOutSqlLogger)
+                    // Drop all existing tables to ensure a clean slate on each run
+                    SchemaUtils.drop(*tables)
+                    // Create all tables
+                    SchemaUtils.create(*tables)
+                }
             }
-        }
 
     // Set up data access layer.
     val dal = AntaeusDal(db = db)
@@ -56,12 +56,13 @@ fun main() {
     val customerService = CustomerService(dal = dal)
 
     // This is _your_ billing service to be included where you see fit
-    val billingService = BillingService(paymentProvider = paymentProvider)
+    val billingService = BillingService(paymentProvider = paymentProvider, customerService = customerService, invoiceService = invoiceService)
 
     // Create REST web service
     AntaeusRest(
-        invoiceService = invoiceService,
-        customerService = customerService
+            invoiceService = invoiceService,
+            customerService = customerService,
+            billingService = billingService
     ).run()
 }
 

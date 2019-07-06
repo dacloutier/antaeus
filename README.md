@@ -1,3 +1,30 @@
+## David Cloutier Work Log
+* 2018-07-06 : Initial clone and exploration.
+    * Concerns: 
+        * I have a basic knowledge of kotlin so I'll need to brush up on that.
+    * Notes:
+        * I need to get to know the existing classes to understand how they all work together
+        * Ran the junit tests make sure they already pass.
+        * Ran the docker start to make sure my environement is properly configured to run the app
+        * Added a basic implememntation of the Billing Servce and some basic tests.
+
+* GLOBAL TODO:
+    * [X] Setup my environment
+    * [X] Run tests
+    * [X] Run docker image
+    * [X] Add missing invoice statuses
+    * [X] Add logging.
+    * [X] Add billing Service basic impl and simple test.
+    * [ ] Add data in mocked database to create invalid states (invalid currencies, missing customers(although, not likely in a RDBMS, may happen if using document persistence mongo)
+    * [ ] Add Junit tests to verify handling of errors
+    * [ ] Make sure invoice update in databse and billing provider use the same transaction.
+    * [ ] Create a simple rest endpoint to handle an invoice
+    * [ ] 
+    * [ ] 
+    * [ ] 
+    * [ ] 
+    
+
 ## Antaeus
 
 Antaeus (/ænˈtiːəs/), in Greek mythology, a giant of Libya, the son of the sea god Poseidon and the Earth goddess Gaia. He compelled all strangers who were passing through the country to wrestle with him. Whenever Antaeus touched the Earth (his mother), his strength was renewed, so that even if thrown to the ground, he was invincible. Heracles, in combat with him, discovered the source of his strength and, lifting him up from Earth, crushed him to death.
