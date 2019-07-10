@@ -4,6 +4,8 @@ plugins {
 
 kotlinProject()
 
+dataLibs()
+
 dependencies {
     implementation(project(":pleo-antaeus-data"))
     implementation("org.apache.logging.log4j:log4j-api-kotlin:1.0.0")

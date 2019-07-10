@@ -7,18 +7,65 @@
 
 package io.pleo.antaeus.data
 
-import io.pleo.antaeus.models.Currency
-import io.pleo.antaeus.models.Customer
-import io.pleo.antaeus.models.Invoice
-import io.pleo.antaeus.models.InvoiceStatus
-import io.pleo.antaeus.models.Money
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import io.pleo.antaeus.models.*
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
+
 class AntaeusDal(private val db: Database) {
+
+    // new methods
+    fun createInvoice(amount: Money, customer: Customer, status: InvoiceStatus = InvoiceStatus.PENDING): Invoice? {
+        val id = transaction(db) {
+            // Insert the invoice and returns its new id.
+            InvoiceTable
+                    .insert {
+                        it[this.value] = amount.value
+                        it[this.currency] = amount.currency.toString()
+                        it[this.status] = status.toString()
+                        it[this.customerId] = customer.id
+                    } get InvoiceTable.id
+        }
+
+        return fetchInvoice(id!!)
+    }
+
+    /**
+     * Function to update an invoice on the DB.
+     * Only the attributes value, currency and status are updated, as the attributes id and customerId should never change
+     */
+    fun updateInvoice(invoice: Invoice){
+        transaction(db){
+            InvoiceTable.update({InvoiceTable.id eq invoice.id}){
+                it[this.value] = invoice.amount.value
+                it[this.currency] = invoice.amount.currency.toString()
+                it[this.status] = invoice.status.toString()
+            }
+        }
+    }
+
+
+    fun fetchInvoiceByStatus(vararg statuses:InvoiceStatus):List<Invoice>{
+        return transaction(db) {
+            InvoiceTable.select{
+                InvoiceTable.status.inList(statuses.map{it.toString()})
+            }
+                    .map { it.toInvoice() }
+        }
+    }
+
+
+    fun fetchBillableInvoices():List<Invoice>{
+        return transaction(db) {
+            InvoiceTable.select{
+                            InvoiceTable.status.eq(InvoiceStatus.SYSTEM_ERROR.toString()) or
+                            InvoiceTable.status.eq(InvoiceStatus.PENDING.toString()) or
+                            InvoiceTable.status.eq(InvoiceStatus.INSUFICIENT_FUNDS_ERROR.toString())
+                    }
+                    .map { it.toInvoice() }
+        }
+    }
+
     fun fetchInvoice(id: Int): Invoice? {
         // transaction(db) runs the internal query as a new database transaction.
         return transaction(db) {
@@ -36,21 +83,6 @@ class AntaeusDal(private val db: Database) {
                 .selectAll()
                 .map { it.toInvoice() }
         }
-    }
-
-    fun createInvoice(amount: Money, customer: Customer, status: InvoiceStatus = InvoiceStatus.PENDING): Invoice? {
-        val id = transaction(db) {
-            // Insert the invoice and returns its new id.
-            InvoiceTable
-                .insert {
-                    it[this.value] = amount.value
-                    it[this.currency] = amount.currency.toString()
-                    it[this.status] = status.toString()
-                    it[this.customerId] = customer.id
-                } get InvoiceTable.id
-        }
-
-        return fetchInvoice(id!!)
     }
 
     fun fetchCustomer(id: Int): Customer? {

@@ -12,7 +12,7 @@ import kotlin.random.Random
 internal fun setupInitialData(dal: AntaeusDal) {
     val customers = (1..100).mapNotNull {
         dal.createCustomer(
-            currency = Currency.values()[Random.nextInt(0, Currency.values().size)]
+            currency = randomCurrency()
         )
     }
 
@@ -21,13 +21,27 @@ internal fun setupInitialData(dal: AntaeusDal) {
             dal.createInvoice(
                 amount = Money(
                     value = BigDecimal(Random.nextDouble(10.0, 500.0)),
-                    currency = customer.currency
+                    currency = randomIncorrectCurrency(customer.currency)
                 ),
                 customer = customer,
                 status = if (it == 1) InvoiceStatus.PENDING else InvoiceStatus.PAID
             )
         }
     }
+}
+
+internal fun randomCurrency():Currency {
+    return Currency.values()[Random.nextInt(0, Currency.values().size)];
+}
+
+/**
+ * 1 in 20 is always a botched roll!
+ */
+internal fun randomIncorrectCurrency(customerCurrency: Currency): Currency {
+
+    if (Random.nextInt(1, 20) == 1) return randomCurrency()
+
+    return customerCurrency
 }
 
 // This is the mocked instance of the payment provider

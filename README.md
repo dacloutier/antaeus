@@ -1,5 +1,5 @@
 ## David Cloutier Work Log
-* 2018-07-06 : Initial clone and exploration.
+* 2019-07-06 : Initial clone and exploration.
     * Concerns: 
         * I have a basic knowledge of kotlin so I'll need to brush up on that.
     * Notes:
@@ -7,6 +7,9 @@
         * Ran the junit tests make sure they already pass.
         * Ran the docker start to make sure my environement is properly configured to run the app
         * Added a basic implememntation of the Billing Servce and some basic tests.
+        
+* 2019-07-10 : 
+    *
 
 * GLOBAL TODO:
     * [X] Setup my environment
@@ -15,7 +18,7 @@
     * [X] Add missing invoice statuses
     * [X] Add logging.
     * [X] Add billing Service basic impl and simple test.
-    * [ ] Add data in mocked database to create invalid states (invalid currencies, missing customers(although, not likely in a RDBMS, may happen if using document persistence mongo)
+    * [X] Add data in mocked database to create invalid states (invalid currencies) 1 in 20 are botched invoices. NOTE: I just realized that customers could probably request to be boilled in another currency than their default, so this actually could be a valid state... oh well, this "fake" invalid state helps me test my error handling.
     * [ ] Add Junit tests to verify handling of errors
     * [ ] Make sure invoice update in databse and billing provider use the same transaction.
     * [ ] Create a simple rest endpoint to handle an invoice

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class BillingServiceTest {
-    private val dal = mockk<AntaeusDal> {
+    private val dal = mockk<AntaeusDal>(relaxed = true) {
         every { fetchCustomer(1) } returns Customer(id = 1, currency = Currency.DKK)
         every { fetchInvoice(1) } returns Invoice(id = 1, customerId = 1, amount = Money(value=1.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING)
     }

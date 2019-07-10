@@ -13,6 +13,9 @@ import io.pleo.antaeus.core.services.CustomerService
 import io.pleo.antaeus.core.services.InvoiceService
 import mu.KotlinLogging
 import org.apache.logging.log4j.kotlin.Logging
+import java.io.Serializable
+import java.util.*
+import kotlin.concurrent.fixedRateTimer;
 
 private val logger = KotlinLogging.logger {}
 
@@ -21,6 +24,51 @@ class AntaeusRest (
     private val customerService: CustomerService,
     private val billingService: BillingService
 ) : Runnable, Logging {
+
+
+    class BillingScheduler (private val name: String) {
+        private var schedulerActive:Boolean = false
+        private var interval = 1000*60*60L
+        private var billingTimer = start()
+
+        private fun start(): Timer {
+            schedulerActive = true
+            billingTimer = fixedRateTimer(name = name,
+                    daemon = true,
+                    startAt = Date(),
+                    period = interval) {
+                logger.info("billingScheduler - woohoo! ")
+                // TODO Call real transactional service here!
+
+
+                // TODO
+            }
+            return billingTimer;
+        }
+
+        fun isActive():Boolean {return schedulerActive }
+
+        fun startScheduler() {
+            start();
+        }
+
+
+        fun stopScheduler() {
+            schedulerActive = false
+            billingTimer.cancel()
+        }
+
+        fun toMap():Map<String,Serializable> {
+            return mapOf(
+                    "name" to name,
+                    "interval" to interval,
+                    "active" to schedulerActive
+            )
+        }
+
+    }
+
+    private var billingScheduler = BillingScheduler("billingScheduler")
 
     override fun run() {
         app.start(7000)
@@ -42,7 +90,9 @@ class AntaeusRest (
             error(404) { ctx -> ctx.json("not found") }
         }
 
-    init {
+
+
+    init {  // TODO these endpoints must be secured
         // Set up URL endpoints for the rest app
         app.routes {
            path("rest") {
@@ -77,6 +127,33 @@ class AntaeusRest (
                            it.json(customerService.fetch(it.pathParam("id").toInt()))
                        }
                    }
+
+                   path("scheduler") {
+                       // URL: /rest/v1/scheduler
+                       get {
+                           it.json(billingScheduler.toMap())
+                       }
+
+                       path("activate") {
+                           // URL: /rest/v1/scheduler/activate
+                           get {
+                               // TODO this should be a post but it's easier to test like this. // TODO these endpoints must be secured
+                               billingScheduler.stopScheduler()
+                               billingScheduler.startScheduler()
+                               it.json(billingScheduler.toMap())
+                           }
+                       }
+
+                       path("deactivate") {
+                           // URL: /rest/v1/scheduler/deactivate
+                           get {
+                               // TODO this should be a post but it's easier to test like this. // TODO these endpoints must be secured
+                               billingScheduler.stopScheduler()
+                               it.json(billingScheduler.toMap())
+                           }
+                       }
+                   }
+
                }
            }
         }
