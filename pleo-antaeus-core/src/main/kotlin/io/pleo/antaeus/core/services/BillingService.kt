@@ -68,6 +68,7 @@ class BillingService(
             }
         }
 
+        logger.info { "Finished the charging attewmpt of invoice ${invoice}" } // TODO data in this object might be sensitive ond be obfuscated from the logs ?
         return invoice;
     }
 }
