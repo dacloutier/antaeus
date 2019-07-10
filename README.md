@@ -9,7 +9,7 @@
         * Added a basic implememntation of the Billing Servce and some basic tests.
         
 * 2019-07-10 : 
-    *
+    * Added test for insuficient funds and payment provider network issues
 
 * GLOBAL TODO:
     * [X] Setup my environment
@@ -19,8 +19,8 @@
     * [X] Add logging.
     * [X] Add billing Service basic impl and simple test.
     * [X] Add data in mocked database to create invalid states (invalid currencies) 1 in 20 are botched invoices. NOTE: I just realized that customers could probably request to be boilled in another currency than their default, so this actually could be a valid state... oh well, this "fake" invalid state helps me test my error handling.
-    * [ ] Add Junit tests to verify handling of errors
-    * [ ] Make sure invoice update in databse and billing provider use the same transaction.
+    * [X] Add Junit tests to verify handling of errors
+    * [-] Make sure invoice update in databse and billing provider use the same transaction. NOTE This will be added as a future feature as the implementation of the paymemnt provider is too black-box...
     * [ ] Create a simple rest endpoint to handle an invoice
     * [ ] 
     * [ ] 
