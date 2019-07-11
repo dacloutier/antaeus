@@ -6,15 +6,16 @@ import io.pleo.antaeus.core.exceptions.NetworkException
 import io.pleo.antaeus.core.external.PaymentProvider
 import io.pleo.antaeus.data.AntaeusDal
 import io.pleo.antaeus.models.*
+import org.joda.time.DateTime
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class BillingServiceTest {
     private val dal = mockk<AntaeusDal>(relaxed = true) {
-        every { fetchCustomer(1) } returns Customer(id = 1, currency = Currency.DKK)
-        every { fetchInvoice(1) } returns Invoice(id = 1, customerId = 1, amount = Money(value=1.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING)
-        every { fetchInvoice(2) } returns Invoice(id = 2, customerId = 1, amount = Money(value=100000.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING)
-        every { fetchInvoice(-1) } returns Invoice(id = -1, customerId = 1, amount = Money(value=100000.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING)
+        every { fetchCustomer(1) } returns Customer(id = 1, currency = Currency.DKK, nextBillingStartDate = DateTime.now())
+        every { fetchInvoice(1) } returns Invoice(id = 1, customerId = 1, amount = Money(value=1.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING, scheduledPayment = DateTime.now(), lastPaymentAttempt = DateTime.now())
+        every { fetchInvoice(2) } returns Invoice(id = 2, customerId = 1, amount = Money(value=100000.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING, scheduledPayment = DateTime.now(), lastPaymentAttempt = DateTime.now())
+        every { fetchInvoice(-1) } returns Invoice(id = -1, customerId = 1, amount = Money(value=100000.toBigDecimal(), currency = Currency.DKK), status = InvoiceStatus.PENDING, scheduledPayment = DateTime.now(), lastPaymentAttempt = DateTime.now())
     }
 
     private val customerService = CustomerService(dal = dal)

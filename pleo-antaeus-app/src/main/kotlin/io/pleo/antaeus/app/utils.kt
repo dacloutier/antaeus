@@ -5,14 +5,18 @@ import io.pleo.antaeus.models.Currency
 import io.pleo.antaeus.models.Invoice
 import io.pleo.antaeus.models.InvoiceStatus
 import io.pleo.antaeus.models.Money
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import java.math.BigDecimal
+import java.util.*
 import kotlin.random.Random
 
 // This will create all schemas and setup initial data
 internal fun setupInitialData(dal: AntaeusDal) {
     val customers = (1..100).mapNotNull {
         dal.createCustomer(
-            currency = randomCurrency()
+            currency = randomCurrency(),
+            nextBillingStartDate = randomBillingDate()
         )
     }
 
@@ -24,10 +28,25 @@ internal fun setupInitialData(dal: AntaeusDal) {
                     currency = randomIncorrectCurrency(customer.currency)
                 ),
                 customer = customer,
-                status = if (it == 1) InvoiceStatus.PENDING else InvoiceStatus.PAID
+                status = InvoiceStatus.values().random()
             )
         }
     }
+}
+
+internal fun randomBillingDate(): DateTime {
+ return DateTime.now()
+         .withHourOfDay(0)
+         .withMinuteOfHour(1)
+         .withSecondOfMinute(0)
+         .withDayOfMonth(1)
+         .plusMonths(Random.nextInt(0,1))
+         .withZoneRetainFields(getRandomZone())
+}
+
+internal fun getRandomZone(): DateTimeZone {
+    return DateTimeZone.forID(DateTimeZone.getAvailableIDs().random())
+
 }
 
 internal fun randomCurrency():Currency {

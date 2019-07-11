@@ -8,6 +8,7 @@ import io.pleo.antaeus.models.Currency
 import io.pleo.antaeus.models.Invoice
 import io.pleo.antaeus.models.InvoiceStatus
 import io.pleo.antaeus.models.Money
+import org.joda.time.DateTime
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -16,8 +17,8 @@ class InvoiceServiceTest {
     private val dal = mockk<AntaeusDal> {
         every { fetchInvoice(404) } returns null
         every { fetchInvoiceByStatus( InvoiceStatus.SYSTEM_ERROR, InvoiceStatus.PENDING) } returns listOf(
-                                                                                        Invoice(id = 1, status = InvoiceStatus.SYSTEM_ERROR, customerId = 1, amount = Money(1.toBigDecimal(), Currency.DKK)),
-                                                                                        Invoice(id = 2, status = InvoiceStatus.PENDING, customerId = 2, amount = Money(2.toBigDecimal(), Currency.EUR) )
+                                                                                        Invoice(id = 1, status = InvoiceStatus.SYSTEM_ERROR, customerId = 1, amount = Money(1.toBigDecimal(), Currency.DKK), scheduledPayment = DateTime.now(), lastPaymentAttempt = DateTime.now()),
+                                                                                        Invoice(id = 2, status = InvoiceStatus.PENDING, customerId = 2, amount = Money(2.toBigDecimal(), Currency.EUR), scheduledPayment = DateTime.now(), lastPaymentAttempt = DateTime.now() )
                                                                                     )
     }
 

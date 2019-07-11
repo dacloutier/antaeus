@@ -10,6 +10,7 @@ package io.pleo.antaeus.data
 import io.pleo.antaeus.models.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.joda.time.DateTime
 
 
 class AntaeusDal(private val db: Database) {
@@ -24,6 +25,8 @@ class AntaeusDal(private val db: Database) {
                         it[this.currency] = amount.currency.toString()
                         it[this.status] = status.toString()
                         it[this.customerId] = customer.id
+                        it[this.scheduledPayment] = customer.nextBillingStartDate
+                        // when inserting an invoice, it shouldnt have a "lastPaymentAttempt" so its null.
                     } get InvoiceTable.id
         }
 
@@ -40,6 +43,9 @@ class AntaeusDal(private val db: Database) {
                 it[this.value] = invoice.amount.value
                 it[this.currency] = invoice.amount.currency.toString()
                 it[this.status] = invoice.status.toString()
+                it[this.scheduledPayment] = invoice.scheduledPayment
+                it[this.lastPaymentAttempt] = invoice.lastPaymentAttempt
+
             }
         }
     }
@@ -102,14 +108,27 @@ class AntaeusDal(private val db: Database) {
         }
     }
 
-    fun createCustomer(currency: Currency): Customer? {
+    fun createCustomer(currency: Currency, nextBillingStartDate:DateTime): Customer? {
         val id = transaction(db) {
             // Insert the customer and return its new id.
             CustomerTable.insert {
                 it[this.currency] = currency.toString()
+                it[this.nextBillingStartDate] = nextBillingStartDate
             } get CustomerTable.id
         }
 
         return fetchCustomer(id!!)
+    }
+
+    /**
+     * Function to update a customer on the DB.
+     */
+    fun updateCustomer(customer: Customer ){
+        transaction(db){
+            CustomerTable.update({CustomerTable.id eq customer.id}){
+                it[this.currency] = customer.currency.toString()
+                it[this.nextBillingStartDate] = customer.nextBillingStartDate
+            }
+        }
     }
 }

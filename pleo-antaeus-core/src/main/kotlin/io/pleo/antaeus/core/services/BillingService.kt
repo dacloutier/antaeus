@@ -9,6 +9,7 @@ import io.pleo.antaeus.models.Customer
 import io.pleo.antaeus.models.Invoice
 import io.pleo.antaeus.models.InvoiceStatus
 import org.apache.logging.log4j.kotlin.Logging
+import org.joda.time.DateTime
 
 class BillingService(
         private val paymentProvider: PaymentProvider,
@@ -17,11 +18,11 @@ class BillingService(
 ) : Logging {
 
 
-    // TODO - billing and invoice status saving should be transactionnal.
+    // TODO - billing and invoice status saving should be transactional.
     fun charge(i: Invoice): Invoice {
         logger.info { "Start charging of invoice ${i}" } // TODO data in this object might be sensitive ond be obfuscated from the logs ?
         var invoice = i
-        var customer = Customer(id = i.customerId, currency = i.amount.currency) // initialized in case the fetch later fails.
+        var customer = Customer(id = i.customerId, currency = i.amount.currency, nextBillingStartDate = DateTime.now()) // initialized in case the fetch later fails.
 
         try {
             invoice = invoiceService.fetch(i.id) // make sure the invoice actually exists

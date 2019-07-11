@@ -11,9 +11,13 @@ import io.pleo.antaeus.core.exceptions.EntityNotFoundException
 import io.pleo.antaeus.core.services.BillingService
 import io.pleo.antaeus.core.services.CustomerService
 import io.pleo.antaeus.core.services.InvoiceService
+import io.pleo.antaeus.models.Currency
+import io.pleo.antaeus.models.Invoice
+import io.pleo.antaeus.models.InvoiceStatus
 import mu.KotlinLogging
 import org.apache.logging.log4j.kotlin.Logging
 import java.io.Serializable
+import java.math.BigDecimal
 import java.util.*
 import kotlin.concurrent.fixedRateTimer;
 
@@ -26,27 +30,80 @@ class AntaeusRest (
 ) : Runnable, Logging {
 
 
-    class BillingScheduler (private val name: String) {
+    class BillingScheduler (private val name: String, private val billingService:BillingService, private val invoiceService: InvoiceService ) {
         private var schedulerActive:Boolean = false
-        private var interval = 1000*60*60L
+        private var interval = 1000*60*60L // TODO: Externalize. (although every hour seems good.)
         private var billingTimer = start()
 
         private fun start(): Timer {
-            schedulerActive = true
-            billingTimer = fixedRateTimer(name = name,
-                    daemon = true,
-                    startAt = Date(),
-                    period = interval) {
-                logger.info("billingScheduler - woohoo! ")
-                // TODO Call real transactional service here!
+            stopScheduler() // just in case.... we would'nt want to timers running.
+            // TODO: calculate next running time:
+            val nextStart:Date = Date()
 
+            billingTimer = fixedRateTimer(name    = name,
+                                          daemon  = true,
+                                          startAt = nextStart,
+                                          period  = interval) {
+                logger.info("billingScheduler - It's ALIVE! ")
 
-                // TODO
+                // this
+                runBillingCycle()
+
+                logger.info("billingScheduler - Going back to bed. ")
             }
+
+            schedulerActive = true
             return billingTimer;
         }
 
-        fun isActive():Boolean {return schedulerActive }
+        /**
+         *
+         */
+        private fun runBillingCycle(){
+            // step 1: collect underpants:
+            val invoices = invoiceService.fetchByStatus(InvoiceStatus.SYSTEM_ERROR, InvoiceStatus.INSUFICIENT_FUNDS_ERROR, InvoiceStatus.PENDING)
+
+            // TODO fetch by UTC billing date has passed.
+
+            // reporting purposes
+            val processedInvoices = mutableListOf<Invoice>()
+
+            // step 2: ???
+            invoices.forEach {
+                val i = billingService.charge(it)
+                processedInvoices.add(i)
+            }
+
+            // step 3: profit..... lets see how well we did.
+            logger.info{ "Invoices to process by initial status: ${invoices.groupingBy { it.status }.eachCount()}. Total: ${invoices.size}" }
+            logger.info{ "Processed invoices by status: ${processedInvoices.groupingBy { it.status }.eachCount()}. Total: ${processedInvoices.size}" }
+
+            val aggregatedBefore = invoices.groupingBy { it.amount.currency.toString() }
+                    .aggregate { key, accumulator: BigDecimal?, invoice:Invoice, first:Boolean ->
+                        if(first) invoice.amount.value
+                        else accumulator!!.add(invoice.amount.value)
+                    }
+
+            val aggregatedAfter = processedInvoices
+                    .filter { it.status == InvoiceStatus.PAID }
+                    .groupingBy { it.amount.currency.toString() }
+                    .aggregate { key, accumulator: BigDecimal?, invoice:Invoice, first:Boolean ->
+                        if(first) invoice.amount.value
+                        else accumulator!!.add(invoice.amount.value)
+                    }
+
+
+            logger.info{ "Total accounts receivable: ${aggregatedBefore}"}
+            logger.info{ "Total paid:                ${aggregatedAfter}"}
+
+            val leftover = mutableMapOf<String, BigDecimal>()
+            aggregatedBefore.forEach{
+                leftover[it.key] = it.value?.minus((aggregatedAfter[it.key] ?: 0.toBigDecimal())) ?: 0.toBigDecimal()
+            }
+
+            logger.info{ "Left unpaid:               ${leftover}"}
+        }
+
 
         fun startScheduler() {
             start();
@@ -55,7 +112,7 @@ class AntaeusRest (
 
         fun stopScheduler() {
             schedulerActive = false
-            billingTimer.cancel()
+            billingTimer?.cancel()
         }
 
         fun toMap():Map<String,Serializable> {
@@ -68,7 +125,7 @@ class AntaeusRest (
 
     }
 
-    private var billingScheduler = BillingScheduler("billingScheduler")
+    private var billingScheduler = BillingScheduler("billingScheduler", billingService, invoiceService)
 
     override fun run() {
         app.start(7000)
@@ -131,7 +188,6 @@ class AntaeusRest (
                    path("scheduler") {
                        // URL: /rest/v1/scheduler
                        get {
-                           it.json(billingScheduler.toMap())
                        }
 
                        path("activate") {
