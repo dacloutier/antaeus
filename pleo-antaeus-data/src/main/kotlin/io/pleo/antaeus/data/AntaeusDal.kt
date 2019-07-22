@@ -61,14 +61,21 @@ class AntaeusDal(private val db: Database) {
     }
 
 
-    fun fetchBillableInvoices():List<Invoice>{
+    /**
+     * made the billing date clause optional for testing flexibility
+     */
+    fun fetchBillableInvoices(billingDateTime: DateTime?):List<Invoice>{
         return transaction(db) {
-            InvoiceTable.select{
-                            InvoiceTable.status.eq(InvoiceStatus.SYSTEM_ERROR.toString()) or
-                            InvoiceTable.status.eq(InvoiceStatus.PENDING.toString()) or
-                            InvoiceTable.status.eq(InvoiceStatus.INSUFICIENT_FUNDS_ERROR.toString())
-                    }
-                    .map { it.toInvoice() }
+            val query = InvoiceTable.selectAll()
+            billingDateTime?.let {
+                query.andWhere { InvoiceTable.scheduledPayment.lessEq(billingDateTime) }
+            }
+            query.andWhere {
+                InvoiceTable.status.eq(InvoiceStatus.SYSTEM_ERROR.toString()) or
+                InvoiceTable.status.eq(InvoiceStatus.PENDING.toString()) or
+                InvoiceTable.status.eq(InvoiceStatus.INSUFICIENT_FUNDS_ERROR.toString())
+            }
+            query.map { it.toInvoice() }
         }
     }
 

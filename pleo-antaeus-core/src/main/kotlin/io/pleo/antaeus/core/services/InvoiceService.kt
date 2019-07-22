@@ -8,6 +8,7 @@ import io.pleo.antaeus.core.exceptions.InvoiceNotFoundException
 import io.pleo.antaeus.data.AntaeusDal
 import io.pleo.antaeus.models.Invoice
 import io.pleo.antaeus.models.InvoiceStatus
+import org.joda.time.DateTime
 
 class InvoiceService(private val dal: AntaeusDal) {
     fun fetchAll(): List<Invoice> {
@@ -22,8 +23,8 @@ class InvoiceService(private val dal: AntaeusDal) {
         return dal.fetchInvoiceByStatus(*statuses)
     }
 
-    fun fetchBillable(): List<Invoice> {
-        return dal.fetchBillableInvoices();
+    fun fetchBillable(scheduledBillingDate : DateTime?): List<Invoice> {
+        return dal.fetchBillableInvoices(scheduledBillingDate);
     }
 
     fun save(invoice: Invoice){

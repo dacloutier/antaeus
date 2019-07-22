@@ -41,7 +41,6 @@ class BillingService(
                 invoice.status = InvoiceStatus.INSUFICIENT_FUNDS_ERROR
             }
 
-            // TODO end TX
         } catch (e: CustomerNotFoundException) {
             logger.error { "Customer ${invoice.customerId} of invoice #${i.id} is not found." }
             invoice.status = InvoiceStatus.INVALID_CUSTOMER

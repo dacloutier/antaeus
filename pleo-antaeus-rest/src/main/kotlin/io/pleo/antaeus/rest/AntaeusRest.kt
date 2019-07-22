@@ -16,6 +16,7 @@ import io.pleo.antaeus.models.Invoice
 import io.pleo.antaeus.models.InvoiceStatus
 import mu.KotlinLogging
 import org.apache.logging.log4j.kotlin.Logging
+import org.joda.time.DateTime
 import java.io.Serializable
 import java.math.BigDecimal
 import java.util.*
@@ -59,11 +60,11 @@ class AntaeusRest (
         /**
          *
          */
-        private fun runBillingCycle(){
-            // step 1: collect underpants:
-            val invoices = invoiceService.fetchByStatus(InvoiceStatus.SYSTEM_ERROR, InvoiceStatus.INSUFICIENT_FUNDS_ERROR, InvoiceStatus.PENDING)
+        private fun runBillingCycle() {
+            // step 1: collect underpants
 
-            // TODO fetch by UTC billing date has passed.
+            // fetch by UTC billing date has passed.
+            val invoices = invoiceService.fetchBillable(DateTime())
 
             // reporting purposes
             val processedInvoices = mutableListOf<Invoice>()
@@ -149,7 +150,7 @@ class AntaeusRest (
 
 
 
-    init {  // TODO these endpoints must be secured
+    init {  // TODO these endpoints must be secured, this might be externalized using something like https://istio.io sidecar
         // Set up URL endpoints for the rest app
         app.routes {
            path("rest") {
@@ -193,7 +194,6 @@ class AntaeusRest (
                        path("activate") {
                            // URL: /rest/v1/scheduler/activate
                            get {
-                               // TODO this should be a post but it's easier to test like this. // TODO these endpoints must be secured
                                billingScheduler.stopScheduler()
                                billingScheduler.startScheduler()
                                it.json(billingScheduler.toMap())
@@ -203,7 +203,6 @@ class AntaeusRest (
                        path("deactivate") {
                            // URL: /rest/v1/scheduler/deactivate
                            get {
-                               // TODO this should be a post but it's easier to test like this. // TODO these endpoints must be secured
                                billingScheduler.stopScheduler()
                                it.json(billingScheduler.toMap())
                            }
