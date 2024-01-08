@@ -1,0 +1,228 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="599px" height="418px" viewBox="-0.5 -0.5 599 418" content="&lt;mxfile&gt;&lt;diagram id=&quot;C5RBs43oDa-KdzZeNtuy&quot; name=&quot;HighLevelSystemArchitecture&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs>
+        <clipPath id="mx-clip-4-31-152-26-0">
+            <rect x="4" y="31" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-57-152-26-0">
+            <rect x="4" y="57" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-83-152-26-0">
+            <rect x="4" y="83" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-117-152-26-0">
+            <rect x="4" y="117" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-307-152-26-0">
+            <rect x="4" y="307" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-333-152-26-0">
+            <rect x="4" y="333" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-367-152-26-0">
+            <rect x="4" y="367" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-4-393-152-26-0">
+            <rect x="4" y="393" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-264-341-152-26-0">
+            <rect x="264" y="341" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-101-152-26-0">
+            <rect x="442" y="101" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-127-152-26-0">
+            <rect x="442" y="127" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-153-152-26-0">
+            <rect x="442" y="153" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-179-152-26-0">
+            <rect x="442" y="179" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-205-152-26-0">
+            <rect x="442" y="205" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-239-152-26-0">
+            <rect x="442" y="239" width="152" height="26"/>
+        </clipPath>
+        <clipPath id="mx-clip-442-265-152-26-0">
+            <rect x="442" y="265" width="152" height="26"/>
+        </clipPath>
+    </defs>
+    <g>
+        <a xlink:href="person_model">
+            <path d="M 0 26 L 0 0 L 160 0 L 160 26" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+            <path d="M 0 26 L 0 138 L 160 138 L 160 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+            <path d="M 0 26 L 160 26" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+            <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-style="italic" text-anchor="middle" font-size="12px">
+                <text x="79.5" y="17.5">
+                    Person
+                </text>
+            </g>
+        </a>
+        <rect x="0" y="26" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-31-152-26-0)" font-size="12px">
+            <text x="5.5" y="43.5">
+                Name
+            </text>
+        </g>
+        <rect x="0" y="52" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-57-152-26-0)" font-size="12px">
+            <text x="5.5" y="69.5">
+                Phone Number
+            </text>
+        </g>
+        <rect x="0" y="78" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-83-152-26-0)" font-size="12px">
+            <text x="5.5" y="95.5">
+                Email Address
+            </text>
+        </g>
+        <path d="M 0 108 L 160 108" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <rect x="0" y="112" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-117-152-26-0)" font-size="12px">
+            <text x="5.5" y="129.5">
+                Purchase Parking Pass
+            </text>
+        </g>
+        <path d="M 0 302 L 0 276 L 160 276 L 160 302" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 0 302 L 0 414 L 160 414 L 160 302" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 0 302 L 160 302" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="79.5" y="293.5">
+                Student
+            </text>
+        </g>
+        <rect x="0" y="302" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-307-152-26-0)" font-size="12px">
+            <text x="5.5" y="319.5">
+                Student Number
+            </text>
+        </g>
+        <rect x="0" y="328" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-333-152-26-0)" font-size="12px">
+            <text x="5.5" y="345.5">
+                Average Mark
+            </text>
+        </g>
+        <path d="M 0 358 L 160 358" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <rect x="0" y="362" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-decoration="underline" clip-path="url(#mx-clip-4-367-152-26-0)" font-size="12px">
+            <text x="5.5" y="379.5">
+                Is Eligible To Enroll
+            </text>
+        </g>
+        <rect x="0" y="388" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-4-393-152-26-0)" font-size="12px">
+            <text x="5.5" y="405.5">
+                Get Seminars Taken
+            </text>
+        </g>
+        <path d="M 80 276 L 80 207 L 80 150.12" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 80 139.12 L 85.5 150.12 L 74.5 150.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 260 336 L 260 310 L 420 310 L 420 336" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 260 336 L 260 380 L 420 380 L 420 336" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 260 336 L 420 336" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="339.5" y="327.5">
+                Professor
+            </text>
+        </g>
+        <rect x="260" y="336" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-264-341-152-26-0)" font-size="12px">
+            <text x="265.5" y="353.5">
+                Salary
+            </text>
+        </g>
+        <path d="M 260 366 L 420 366" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 340 310 L 340 224 L 80 224 L 80 150.12" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 80 139.12 L 85.5 150.12 L 74.5 150.12 Z" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 438 96 L 438 70 L 598 70 L 598 96" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 438 96 L 438 286 L 598 286 L 598 96" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 438 96 L 598 96" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="517.5" y="87.5">
+                Address
+            </text>
+        </g>
+        <rect x="438" y="96" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-101-152-26-0)" font-size="12px">
+            <text x="443.5" y="113.5">
+                Street
+            </text>
+        </g>
+        <rect x="438" y="122" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-127-152-26-0)" font-size="12px">
+            <text x="443.5" y="139.5">
+                City
+            </text>
+        </g>
+        <rect x="438" y="148" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-153-152-26-0)" font-size="12px">
+            <text x="443.5" y="165.5">
+                State
+            </text>
+        </g>
+        <rect x="438" y="174" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-179-152-26-0)" font-size="12px">
+            <text x="443.5" y="191.5">
+                Postal Code
+            </text>
+        </g>
+        <rect x="438" y="200" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-205-152-26-0)" font-size="12px">
+            <text x="443.5" y="217.5">
+                Country
+            </text>
+        </g>
+        <path d="M 438 230 L 598 230" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <rect x="438" y="234" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-239-152-26-0)" font-size="12px">
+            <text x="443.5" y="251.5">
+                Validate
+            </text>
+        </g>
+        <rect x="438" y="260" width="160" height="26" fill="none" stroke="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" clip-path="url(#mx-clip-442-265-152-26-0)" font-size="12px">
+            <text x="443.5" y="277.5">
+                Output As Label
+            </text>
+        </g>
+        <path d="M 160 104 L 299 104 L 435.76 104" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <path d="M 429.88 107.5 L 436.88 104 L 429.88 100.5" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px">
+            <text x="161.5" y="103.5">
+                0..1
+            </text>
+        </g>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="end" font-size="12px">
+            <text x="429.5" y="103.5">
+                1
+            </text>
+        </g>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 96px; margin-left: 332px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: nowrap;">
+                                lives at
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="332" y="99" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px" text-anchor="middle">
+                    lives at
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>
