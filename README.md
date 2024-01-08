@@ -1,6 +1,6 @@
 ## David Cloutier Work Log
 
-![diagram](arch.drawio.svg)
+![diagram](./arch.drawio.svg)
 
 
 * 2019-07-06 : Initial clone and exploration.
