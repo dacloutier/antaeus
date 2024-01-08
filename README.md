@@ -1,11 +1,6 @@
 ## David Cloutier Work Log
 
-<<<<<<< HEAD
 ![diagram](./arch2.drawio.svg)
-=======
-![diagram](./arch.drawio.svg)
-<img src="./arch.drawio.svg">
->>>>>>> 50b142b52f76bc2d1a50bd433d579a630316f3d9
 
 * 2019-07-06 : Initial clone and exploration.
     * Concerns: 
